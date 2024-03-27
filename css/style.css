@@ -1,0 +1,145 @@
+
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+/*
+.text-info{
+  color:#33725d!important
+}
+*/
+
+body {
+  place-items: center;
+  font-family: 'Red Hat Text', sans-serif;
+                                                
+}
+
+
+.my-button{
+  color:#F0F1EC;
+  background-color:#49A586;
+  border-color: #49A586;
+} 
+
+.logo-image {
+  height: auto;
+  width: 40%;
+  
+}
+
+.logo-image.hide {
+  opacity: 0;
+}
+
+
+.center-container {
+  text-align: center;
+}
+
+.navbar{
+  background-color:#F0F1EC;
+}
+
+body{
+  background-color:#233331
+}
+
+.typed-out{
+  overflow: hidden;
+  border-right: .15em solid black;
+  white-space: nowrap;
+  animation: 
+  typing 1s steps(20, end) forwards;
+  font-size: 1.6rem;
+  width: 0;
+}
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+
+.mt-4{height:100vh
+}
+
+/* MY CSS NOW */
+
+.paral p {
+font-size: 24px;
+color:#f5f5f5;
+text-align: center;
+line-height: 60px;
+}
+
+/* Heading for former Parallax (later removed due to revised styling) */ 
+.paral h1 {
+color: #F0F1EC;
+font-size: 60px;
+text-align: center;
+padding-top: 60px;
+line-height: 100px;
+font-family: "YD Yoonche";
+}
+
+.paral h2 {
+color: #F0F1EC;
+font-size: 40px;
+text-align: center;
+padding-top: 60px;
+font-family: "YD Yoonche";
+}
+
+/* This takes a substantial amount of time to load - but I don't want to locally link to a font, and I do have to use this one as it's the band's font. Just give it 10-ish seconds */ 
+@font-face {font-family: "YD Yoonche"; src: url("//db.onlinewebfonts.com/t/ffc278d3825e583bc658db3933a55996.eot"); src: url("//db.onlinewebfonts.com/t/ffc278d3825e583bc658db3933a55996.eot?#iefix") format("embedded-opentype"), url("//db.onlinewebfonts.com/t/ffc278d3825e583bc658db3933a55996.woff2") format("woff2"), url("//db.onlinewebfonts.com/t/ffc278d3825e583bc658db3933a55996.woff") format("woff"), url("//db.onlinewebfonts.com/t/ffc278d3825e583bc658db3933a55996.ttf") format("truetype"), url("//db.onlinewebfonts.com/t/ffc278d3825e583bc658db3933a55996.svg#YD Yoonche") format("svg"); }
+
+
+.paralsec {
+/*background-image: linear-gradient(#fcce33, #e59941); */
+background-color: #49A586;
+
+}
+
+#NavbarBrand{
+  padding:0;
+}
+
+.paralsec1 {
+background-color: #233331;}
+
+.paralsec2{
+  /*background-image: linear-gradient(#eaa53d, #c86152);*/
+  background-color: #49A586;
+}
+
+.navbar{  margin-bottom:0;}
+
+.jumbotron{
+  margin-top:0;
+  margin-bottom: 0;
+  border-radius: 0;}
+
+
+.paralsec2{
+  border-radius: 0rem 0rem 0.3rem 0.3rem;
+}
+
+body, html{
+  height: 100%;
+}
+
+
+#privacyPolicy{
+  margin: 0.67em;
+}
+
+
+.paralsec h1{
+  margin-bottom:1.5rem;
+}
+
+.top-content{
+  padding:15px;
+}
