@@ -62,10 +62,10 @@ void loop() {
     currentMillis = millis();           //get the current time (number of milliseconds since the program started)
     if (currentMillis - startMillis >= period){  
       HTTPClient http; 
-      http.begin("http://api.openweathermap.org/data/2.5/weather?id=2650752&appid=693e1cf659fd7c760f031b67dc91cdb3");
+      http.begin("http://api.openweathermap.org/data/2.5/weather?id=2650752&appid=APIKEYHERE");
       httpCode = http.GET();            //get data from above url
       Dundee = http.getString();        //transfer data to string
-      http.begin("http://api.openweathermap.org/data/2.5/weather?id=2649169&appid=693e1cf659fd7c760f031b67dc91cdb3");
+      http.begin("http://api.openweathermap.org/data/2.5/weather?id=2649169&APIKEYHERE");
       httpCode = http.GET();            //get data from above url
       Fort = http.getString();          //transfer data to string
       startMillis = currentMillis;      //ensure that timer still works after one loop by essentially reseting the starting point
