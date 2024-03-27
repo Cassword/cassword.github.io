@@ -1,0 +1,29 @@
+---
+layout: default
+---
+<header>
+  <nav class="navbar navbar-expand-lg navbar-light ">
+    <a class="navbar-brand" href="{{ site.baseurl }}/">
+      <img id="NavbarBrand" src="{{ site.baseurl }}/images/KNIGHT_DARK.png" width="30" height="30" alt="Everything Everything Navbar Icon">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav mx-auto">
+        <li class="nav-item mx-2 {% if page.url == '/' %}active{% endif %}">
+          <a class="nav-link" href="{{ site.baseurl }}/index.html">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item mx-2 {% if page.url == '/aboutMe.html' %}active{% endif %}">
+          <a class="nav-link" href="{{ site.baseurl }}/aboutMe.html">About </a>
+        </li>
+        <li class="nav-item mx-2 {% if page.url == '/uniWork.html' %}active{% endif %}">
+          <a class="nav-link" href="{{ site.baseurl }}/uniWork.html">Coursework</a>
+        </li>
+        <li class="nav-item mx-2 {% if page.url == '/misc.html' %}active{% endif %}">
+          <a class="nav-link" href="{{ site.baseurl }}/misc.html">Miscellaneous</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</header>
