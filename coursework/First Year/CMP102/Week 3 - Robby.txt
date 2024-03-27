@@ -1,0 +1,236 @@
+MyRobot.cpp
+
+
+#include "MyRobot.h"
+
+#include "Robot.h"
+
+using namespace std;
+
+
+
+
+void MyRobot::move(int n) {   
+
+	for (int i = 0; i < n; i++) {
+
+		if (Robot::obstacle_ahead(room))
+
+		{
+
+			cout << "There is an obstacle ahead of Robby, he can't move any further." << endl;
+
+			break;
+
+		}
+
+		else {
+
+			Robot::move();
+
+		}
+
+	}
+
+}
+
+
+
+
+void MyRobot::back() {
+
+	int firstX = get_xpos(); //get these so we can return if the  spot is not viable
+
+	int firstY = get_ypos();
+
+	switch (Robot::get_dir()) { //check direction so we can know which direction is back in relation and then move there using x and y. 
+
+	case NORTH:
+
+		y++;
+
+		break;
+
+	case EAST:
+
+		x--;
+
+		break;
+
+	case SOUTH:
+
+		y--;
+
+		break;
+
+	case WEST:
+
+		x++;
+
+		break;
+
+	}
+
+	if (room->isObstacle(x, y)) //check if we're on an obstacle, if so return to original position and send message. 
+
+	{
+
+		cout << "Can't move back there, obstacle in the way." << endl;
+
+		Robot::setX(firstX);
+
+		Robot::setY(firstY);
+
+	}
+
+}
+
+
+
+
+void MyRobot::goTo(int x, int y) { //doesn't make use of getDir in this function so not sure if necessarily viable - it does what it should though. 
+
+	int firstX = get_xpos(); //get these so we can return if goTo spot is not viable
+
+	int firstY = get_ypos();
+
+	y = 19 - y; //do this such that it operates on a traditional X-Y axis, as otherwise the top left is 0,0 rather than bottom left as per a tradition set of axis. 
+
+	if (!room->isObstacle(x, y)) //determine if given square is obstacle, if not an obstacle, then go there - direction should remain unchanged.
+
+	{
+
+		Robot::setX(x);  
+
+		Robot::setY(y);
+
+	}
+
+	else { //if there is an obstacle, don't go there and return to original position. 
+
+		cout << "Cannot goTo to that square, obstacle detected." << endl; 
+
+		Robot::setX(firstX);
+
+		Robot::setY(firstY);
+
+	}
+
+}
+
+
+
+
+MyRobot::MyRobot(Room* room) { this->room = room; } //making use of pointer reference to classes, means we can use isObstacle with room successfully.
+
+MyRobot::~MyRobot() {}; //good practice deconstructor
+
+
+MyRobot.h
+
+#pragma once
+
+#include "Robot.h"
+
+class MyRobot :
+
+    public Robot
+
+{
+
+public:
+
+    MyRobot(Room* room); //put room into the constructor so I can use it in MyRobot.cpp
+
+    ~MyRobot(); //deconstructor
+
+    void move(int); //need to pass in the number of squares we're moving
+
+    void back();
+
+    void goTo(int, int); //pass in x and y coourds
+
+};
+int main
+
+int main()
+
+
+{
+
+	room = new Room(7); //use room 7 for obstacle testing 
+
+	robby = new MyRobot(room);
+
+	picture = new GraphicsManager(room, robby);
+
+
+
+
+	// Speed of the render delay in milliseconds
+
+	picture->setDrawDelay(1000);
+
+
+
+
+	robby->goTo(5, 5); //numbers 1-18 are the valid white squares
+
+	picture->draw(); 
+
+
+
+
+	robby->move(3); //means we'll be at 5,8
+
+	picture->draw(); //calling draw here means we can see it move, as opposed to only one call at the end. 
+
+
+
+
+	robby->back(); //means we should end up at 5,7 - and we do.
+
+	picture->draw();
+
+
+
+
+	robby->goTo(2, 9); //test obstacle detection - should not let us goTo here
+
+	picture->draw();
+
+
+
+
+	robby->move(3); //test obstacle detection - should move forward once then tell us we can't move any further
+
+	picture->draw();
+
+
+
+
+	robby->goTo(8, 6); // go here so there is a square behind us 
+
+	picture->draw();
+
+	robby->back(); //should not let us go back because of obstacle
+
+	picture->draw();
+
+
+
+
+
+
+
+
+
+
+
+
+
+	std::cout << "hello"; //End of Instructions for Robby
+
+	system("Pause");
+
+}

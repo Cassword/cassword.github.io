@@ -1,0 +1,66 @@
+class Players{
+
+public:
+
+  //kindly given in 3rd presentation.
+
+  string name;
+
+  int successRate;
+
+  int dartsThrown;
+
+  int bulls_Hit;
+
+  //basically the same variables from our dice program, need totals for each to work out the average, use doubles so I don't have to cast prefixes. 
+
+  double totalDartsThrown;
+
+  double totalBullsHit;
+
+  //brief specifically mentions need for printing out the winner and the number of turns played by each player - so fairly obviously going to need to be in the class. 
+
+  int wins;
+
+  int turns;
+
+  void throwDart(){
+
+    for (int i = 0; i < 3; i++){
+
+        bulls_Hit = bulls_Hit+bullseye(successRate); //call bullseye function with our success rate, in turn will add 1 if bullseye, add 0 if not.
+
+        dartsThrown++;
+
+      }
+
+      totalDartsThrown=totalDartsThrown+dartsThrown; //add each respective turns darts throw and bulls hit to the overall total we're using for the averages. 
+
+      totalBullsHit=totalBullsHit+bulls_Hit;
+
+  }
+
+  void reset(){ //reset the variables every time a new game   is played, otherwise bulls_Hit would remain at 10 from the last iteration and it would break instantly. 
+
+    bulls_Hit = 0;
+
+    dartsThrown = 0;
+
+  }
+
+  
+
+
+  void calculate_average(){ //calculates the average number of throws required to get 10 bulls - which answers our problem, also gives a percentage so we have a 'success chance' and outputs them to display. 
+
+    double throwsReq = ((totalDartsThrown/totalBullsHit)*10);
+
+    double percentage = ((totalBullsHit / totalDartsThrown) * 100);
+
+    cout << name << " used " << setprecision(3) << throwsReq << " darts on average" << endl; //tips mentioned setprecision, so I better use it. 
+
+    cout << name << " hit " << percentage << " % of shots" << endl;
+
+  }
+
+};
