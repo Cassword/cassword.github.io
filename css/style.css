@@ -116,6 +116,7 @@ background-color: #233331;}
 .paralsec2{
   /*background-image: linear-gradient(#eaa53d, #c86152);*/
   background-color: #49A586;
+  width: 100%
 }
 
 .navbar{  margin-bottom:0;}
