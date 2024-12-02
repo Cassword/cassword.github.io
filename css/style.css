@@ -11,6 +11,10 @@ html, body {
 }
 */
 
+header{
+	width:100%;
+}
+
 body {
   place-items: center;
   font-family: 'Red Hat Text', sans-serif;
