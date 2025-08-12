@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Package Management</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> 
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-5">Package Management</h1>
+        {% if not email %}
+            <h2>Login</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" id="loginEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" id="loginPassword" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Login</button>
+            </form>
+
+            <h2 class="mt-5">Register</h2>
+            <form id="registerForm">
+                <div class="form-group">
+                    <label for="registerEmail">Email</label>
+                    <input type="email" class="form-control" id="registerEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerPassword">Password</label>
+                    <input type="password" class="form-control" id="registerPassword" required>
+                </div>
+                <button type="submit" class="btn btn-success">Register</button>
+            </form>
+        {% else %}
+            <h2>Welcome, {{ email }}</h2>
+            <h3>Your Packages</h3>
+            <ul id="packagesList">
+                {% for package in packages %}
+                <li>
+                    Package Code: {{ package.package_code }} | Status: {{ package.status }} | Locker ID: {{ package.locker_id }}
+                    {% if package.status != 'completed' %}
+                        <button class="btn btn-success btn-sm completePackageButton" data-package-code="{{ package.package_code }}">Complete Package</button>
+                    {% endif %}
+                </li>
+                {% endfor %}
+            </ul>
+            
+
+
+            <button class="btn btn-primary mt-3" id="addPackageButton">Add Package</button>
+
+            <button class="btn btn-danger mt-3" id="logoutButton">Logout</button>
+        {% endif %}
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+
+
+    $('.completePackageButton').on('click', function() {
+        const packageCode = $(this).data('package-code');
+        const email = '{{ email }}'; 
+
+        $.ajax({
+            url: '/start_gpio_program',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({ email: email, package_code: packageCode }),
+            success: function(response) {
+                alert("Package was sent to GPIO program for verification.");
+            },
+            error: function(xhr, status, error) {
+                alert("failed to start GPIO program: " + xhr.responseJSON.error);
+            }
+        });
+    });
+
+            $('#loginForm').on('submit', function(e) {
+                e.preventDefault();
+                const email = $('#loginEmail').val();
+                const password = $('#loginPassword').val();
+
+                $.ajax({
+                    url: '/login',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({ email: email, password: password }),
+                    success: function(response) {
+                        window.location.reload(); //reload to fetch packages and display them
+                    },
+                    error: function(xhr, status, error) {
+                        alert("login failed: " + xhr.responseJSON.error);
+                    }
+                });
+            });
+
+            $('#registerForm').on('submit', function(e) {
+                e.preventDefault();
+                const email = $('#registerEmail').val();
+                const password = $('#registerPassword').val();
+
+                $.ajax({
+                    url: '/register',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({ email: email, password: password }),
+                    success: function(response) {
+                        alert("registration successful. Please log in.");
+                    },
+                    error: function(xhr, status, error) {
+                        alert("registering failed: " + xhr.responseJSON.error);
+                    }
+                });
+            });
+
+
+            $('#logoutButton').on('click', function() {
+                $.ajax({
+                    url: '/logout',
+                    type: 'POST',
+                    success: function(response) {
+                        window.location.reload(); 
+                    },
+                    error: function(xhr, status, error) {
+                        alert("logout failed.");
+                    }
+                });
+            });
+
+            $('#addPackageButton').on('click', function() {
+                $.ajax({
+                    url: '/add_package',
+                    type: 'POST',
+                    success: function(response) {
+                        alert("package added successfully! Code: " + response.package_code);
+                        window.location.reload(); 
+                    },
+                    error: function(xhr, status, error) {
+                        alert("failed to add package: " + xhr.responseJSON.error);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

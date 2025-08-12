@@ -122,6 +122,7 @@ background-color: #233331;}
 .navbar{  margin-bottom:0;}
 
 .jumbotron{
+  width: 100%;
   margin-top:0;
   margin-bottom: 0;
   border-radius: 0;}
