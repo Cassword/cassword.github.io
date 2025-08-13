@@ -141,6 +141,9 @@ body, html{
   margin: 0.67em;
 }
 
+.card img{
+  width:100%;
+}
 
 .paralsec h1{
   margin-bottom:1.5rem;
